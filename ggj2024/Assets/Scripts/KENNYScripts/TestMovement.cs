@@ -8,7 +8,7 @@ public class TestMovement : MonoBehaviour
 {
     private PlayerInputActions _input;
 
-    private float _speed = 5f;
+    [SerializeField] private float _speed = 5f;
 
     private void Start()
     {
