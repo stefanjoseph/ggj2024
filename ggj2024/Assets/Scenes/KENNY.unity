@@ -389,7 +389,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &86486076
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1745,7 +1745,7 @@ GameObject:
   - component: {fileID: 585828937}
   m_Layer: 0
   m_Name: Player(Hand)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1779,6 +1779,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 5
+  _smackSpeed: 25
 --- !u!65 &585828938
 BoxCollider:
   m_ObjectHideFlags: 0
