@@ -11,8 +11,8 @@ public class TestMovement : MonoBehaviour
     [SerializeField] private float _speed = 5f;
     [SerializeField] private float _smackSpeed = 15f;
 
-    private Vector3 _lastPosition;
-    private Vector3 _currentPosition;
+    [SerializeField] private float _slapRate = 6f;
+    private float _canSlap = -1f;
 
     private bool _isSmacking;
     private bool _playerCanMove;
@@ -35,25 +35,21 @@ public class TestMovement : MonoBehaviour
 
         }
 
-        if (Input.GetKeyDown(KeyCode.L))
+        if (Input.GetKeyDown(KeyCode.L) && Time.time > _canSlap)
         {
+            Debug.Log("slap rate is working");
             _isSmacking = true;
             _playerCanMove = false;
         }
 
-
-
         HandSmack();
+
     }
 
 
     private void HandSmack()
     {
-        //Vector3 position = transform.position;
-        //float x = position.x;
-
-        //_currentPosition = transform.position;
-
+        
         Vector3 pos = transform.position;
         pos.x = -6;
 
@@ -65,32 +61,18 @@ public class TestMovement : MonoBehaviour
 
         if (transform.position.x >= 5)
         {
-            _isSmacking = false;
             transform.position = pos;
-            //if (_isSmacking == false)
-            //{
-            //    //this.transform.Translate(Vector3.left * _smackSpeed * Time.deltaTime);
-            //    //transform.position -= (returnPoint * _smackSpeed * Time.deltaTime); ;
-
-            //    //Vector3 returnToPosition = transform.position - _currentPosition;
-            //    //returnToPosition = returnToPosition.normalized;
-            //    //transform.position -= returnToPosition * _smackSpeed * Time.deltaTime;
-
-            //    ////This Places it where I want it to be
-            //    //transform.position = temp;
-            //    Debug.Log("Player is moving left");
-            //}
-
+            
         }
-
-        //if (transform.position == _currentPosition)
-        //{
-        //    _playerCanMove = true;
 
         if (transform.position.x <= -6f)
         {
-            _playerCanMove = true;
+            //Cool Down rate for the next available slap. 
+            //Can be adjusted in the Inspector
+            _canSlap = Time.time + _slapRate;
 
+            _isSmacking = false;
+            _playerCanMove = true;
         }
     }
 
