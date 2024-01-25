@@ -53,7 +53,16 @@ public class TrackManager : MonoBehaviour
 
     public bool IsObstacleWithinVisibleWindow(Obstacle obstacle)
     {
-        return obstacle.relativePosition.x >= this.nearPlaneLocation && obstacle.relativePosition.x < this.farPlaneLocation;
+        if (this.farPlaneLocation > this.nearPlaneLocation)
+        {
+            return obstacle.relativePosition.x >= this.nearPlaneLocation && obstacle.relativePosition.x < this.farPlaneLocation;
+        }
+        else
+        {
+            return obstacle.relativePosition.x >= this.nearPlaneLocation && obstacle.relativePosition.x <= 1.0f
+                || obstacle.relativePosition.x >= 0.0f && obstacle.relativePosition.x < this.farPlaneLocation;
+        }
+        
     }
 
     public float ComputeTrackPositionWithWrapAround(float position)
@@ -64,9 +73,12 @@ public class TrackManager : MonoBehaviour
     public Vector2 ConvertToNearPlaneOffset(float trackPositionX, float trackPositionY)
     {
         float nearPlaneOffsetX = trackPositionX - this.exitEdgePosition;
+
+        nearPlaneOffsetX = nearPlaneOffsetX < 0 ? 1.0f - this.exitEdgePosition + trackPositionX : nearPlaneOffsetX;
+
         float nearPlaneOffsetY = trackPositionY - 0.5f;
 
-        Debug.Log($"nearPlaneOffsetX:{nearPlaneOffsetX} nearPlaneOffsetY:{nearPlaneOffsetY}");
+        // Debug.Log($"nearPlaneOffsetX:{nearPlaneOffsetX} nearPlaneOffsetY:{nearPlaneOffsetY}");
         return new Vector2(nearPlaneOffsetX, nearPlaneOffsetY);
     }
 
@@ -82,7 +94,7 @@ public class TrackManager : MonoBehaviour
         float z = this.exitVantagePoint.transform.position.z + unitScale.x*nearPlaneOffset.x;
         float x = this.exitVantagePoint.transform.position.x + unitScale.y*nearPlaneOffset.y;
 
-        Debug.Log($"finalX:{z} finalY:{x}");
+        // Debug.Log($"finalX:{z} finalY:{x}");
         return new Vector3(x, 0.0f, z);
     }
 
