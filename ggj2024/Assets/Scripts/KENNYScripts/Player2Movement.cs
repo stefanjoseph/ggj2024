@@ -1,20 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.Remoting.Contexts;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class TestMovement : MonoBehaviour
+public class Player2Movement : MonoBehaviour
 {
     private PlayerInputActions _input;
 
     [SerializeField] private float _speed = 5f;
-    [SerializeField] private float _smackSpeed = 15f;
+    [SerializeField] private float _slapSpeed = 15f;
 
     [SerializeField] private float _slapRate = 6f;
     private float _canSlap = -1f;
 
-    private bool _isSmacking;
+    private bool _isSlapping;
     private bool _playerCanMove;
 
     public BoxCollider constrainer;
@@ -22,8 +21,8 @@ public class TestMovement : MonoBehaviour
     private void Start()
     {
         _input = new PlayerInputActions();
-        _input.Player.Enable();
-        _input.Player.Slap.performed += Drop_performed;
+        _input.Player2.Enable();
+        _input.Player2.Slap.performed += Drop_performed;
 
         _playerCanMove = true;
     }
@@ -32,21 +31,21 @@ public class TestMovement : MonoBehaviour
     {
         if (Time.time > _canSlap)
         {
-            _isSmacking = true;
+            _isSlapping = true;
             _playerCanMove = false;
         }
     }
 
     private void Update()
     {
-        var move = _input.Player.Movement.ReadValue<Vector3>();
+        var move = _input.Player2.Movement.ReadValue<Vector3>();
 
         if (_playerCanMove == true)
         {
             transform.Translate(move * _speed * Time.deltaTime);
         }
 
-        HandSmack();
+        HandSlap();
     }
 
     private void LateUpdate()
@@ -54,35 +53,33 @@ public class TestMovement : MonoBehaviour
         ConstrainPlayer();
     }
 
-
-    private void HandSmack()
+    private void HandSlap()
     {
         Vector3 pos = transform.position;
 
         //Commences Hand Slap
-        if (_isSmacking == true)
+        if (_isSlapping == true)
         {
-            transform.Translate(Vector3.right * _smackSpeed * Time.deltaTime);
+            transform.Translate(Vector3.left * _slapSpeed * Time.deltaTime);
         }
 
-        //Resets Player position when smack ends
-        if (transform.position.x >= constrainer.bounds.max.x && _isSmacking == true)
+        //Resets Player2 position when slap ends
+        if (transform.position.x <= constrainer.bounds.min.x && _isSlapping == true)
         {
-            pos.x = constrainer.bounds.min.x;
+            pos.x = constrainer.bounds.max.x;
             transform.position = pos;
         }
 
         //Starts the slap cooldown rate and enables the player to freely move again
-        if (pos.x <= constrainer.bounds.min.x && _isSmacking == true)
+        if (pos.x >= constrainer.bounds.max.x && _isSlapping == true)
         {
             _canSlap = Time.time + _slapRate;
-
-            _isSmacking = false;
+            _isSlapping = false;
             _playerCanMove = true;
         }
     }
 
-    //Box collider that contrains the player movement within the box
+    //Box collider that contsrains the Player movement within the box
     private void ConstrainPlayer()
     {
         Vector3 clampedPosition = transform.position;
@@ -93,7 +90,4 @@ public class TestMovement : MonoBehaviour
 
         transform.position = clampedPosition;
     }
-
 }
-    
-
