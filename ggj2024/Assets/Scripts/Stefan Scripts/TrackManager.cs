@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class TrackManager : MonoBehaviour
 {
-    public Camera theCamera;
     public GameObject obstacle;
-    public List<Obstacle> fallenObstacles = new();
+    public List<GameObject> fallenObstacles = new();
     public float visibilityDistance;
     public float exitEdgePosition = 0.0f;
     public float unitsCoveredPerLoop;
     public float nearPlaneLocation;
     public float farPlaneLocation;
-
+    public GameObject exitVantagePoint;
+    public GameObject frontVantagePoint;
     public Vector2 unitScale;
 
     // Start is called before the first frame update
@@ -24,32 +24,34 @@ public class TrackManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        exitEdgePosition += unitsCoveredPerLoop;
+        this.exitEdgePosition += unitsCoveredPerLoop;
         while (exitEdgePosition > 1.0f)
         {
-            exitEdgePosition -= 1.0f;
+            this.exitEdgePosition -= 1.0f;
         }
 
         this.nearPlaneLocation = ComputeTrackPositionWithWrapAround(exitEdgePosition);
         this.farPlaneLocation = ComputeTrackPositionWithWrapAround(exitEdgePosition + visibilityDistance);
 
-        foreach (Obstacle thisObstacle in fallenObstacles)
+        foreach (GameObject thisObstacle in fallenObstacles)
         {
-            if (IsObstacleWithinVisibileWindow(thisObstacle))
+            Obstacle obstacleComponent = thisObstacle.GetComponent<Obstacle>();
+            if (IsObstacleWithinVisibleWindow(obstacleComponent))
             {
-                thisObstacle.isVisible = true;
-                thisObstacle.transform.position = DeterminePositionUsingCamera(ConvertToNearPlaneOffset(thisObstacle.relativePosition));
+                thisObstacle.gameObject.SetActive(true);
+                Vector3 newPosition = DeterminePositionUsingVantagePoint(ConvertToNearPlaneOffset(obstacleComponent.relativePosition));
+                thisObstacle.transform.position = new Vector3(newPosition.x, newPosition.y, newPosition.z);
             }
             else
             {
-                thisObstacle.isVisible = false;
+                thisObstacle.gameObject.SetActive(false);
             }
         }
 
         ManuallyCreateObstacle();
     }
 
-    public bool IsObstacleWithinVisibileWindow(Obstacle obstacle)
+    public bool IsObstacleWithinVisibleWindow(Obstacle obstacle)
     {
         return obstacle.relativePosition.x >= this.nearPlaneLocation && obstacle.relativePosition.x < this.farPlaneLocation;
     }
@@ -61,7 +63,11 @@ public class TrackManager : MonoBehaviour
 
     public Vector2 ConvertToNearPlaneOffset(float trackPositionX, float trackPositionY)
     {
-        return new Vector2(trackPositionX - exitEdgePosition, trackPositionY - 0.5f);
+        float nearPlaneOffsetX = trackPositionX - this.exitEdgePosition;
+        float nearPlaneOffsetY = trackPositionY - 0.5f;
+
+        Debug.Log($"nearPlaneOffsetX:{nearPlaneOffsetX} nearPlaneOffsetY:{nearPlaneOffsetY}");
+        return new Vector2(nearPlaneOffsetX, nearPlaneOffsetY);
     }
 
     public Vector2 ConvertToNearPlaneOffset(Vector2 trackPosition)
@@ -69,25 +75,31 @@ public class TrackManager : MonoBehaviour
         return ConvertToNearPlaneOffset(trackPosition.x, trackPosition.y);
     }
 
-    public Vector2 DeterminePositionUsingCamera(Vector2 nearPlaneOffset)
+    public Vector3 DeterminePositionUsingVantagePoint(Vector2 nearPlaneOffset)
     {
-        return new Vector3(unitScale.x*(theCamera.transform.position.y + nearPlaneOffset.y), 0.0f, unitScale.y*(theCamera.transform.position.x + nearPlaneOffset.x));
+        // From the perspective of the exit vantage point, we are facing the positive z direction
+        // Negative x is to our left and positive x is to our right
+        float z = this.exitVantagePoint.transform.position.z + unitScale.x*nearPlaneOffset.x;
+        float x = this.exitVantagePoint.transform.position.x + unitScale.y*nearPlaneOffset.y;
+
+        Debug.Log($"finalX:{z} finalY:{x}");
+        return new Vector3(x, 0.0f, z);
     }
 
     public void CreateObstacle(float x, float y)
     {
-        GameObject newObstacle = Instantiate(obstacle, DeterminePositionUsingCamera(ConvertToNearPlaneOffset(x, y)), Quaternion.identity);
+        GameObject newObstacle = Instantiate(obstacle, DeterminePositionUsingVantagePoint(ConvertToNearPlaneOffset(x, y)), Quaternion.identity);
 
-        newObstacle.GetComponent<Obstacle>().relativePosition = new Vector2(x, y);
+        newObstacle.GetComponent<Obstacle>().relativePosition = new(x, y);
 
-        fallenObstacles.Add(newObstacle.GetComponent<Obstacle>());
+        this.fallenObstacles.Add(newObstacle);
     }
 
     public void ManuallyCreateObstacle()
     {
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            CreateObstacle(exitEdgePosition, 0.5f);
+            CreateObstacle(this.exitEdgePosition, 0.5f);
         }
     }
 }
