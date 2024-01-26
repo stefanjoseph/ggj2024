@@ -153,6 +153,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacle: {fileID: 5503865821867588468, guid: 81f46a677510540f1a4b810ea510c8c1, type: 3}
+  fallingObstacle: {fileID: 1717669067462862111, guid: 41b8d21284a9b4c60b19a81ee0e2881d, type: 3}
+  fallingObstacles: []
   fallenObstacles: []
   visibilityDistance: 0.6
   exitEdgePosition: 0
@@ -162,6 +164,9 @@ MonoBehaviour:
   exitVantagePoint: {fileID: 665852654}
   frontVantagePoint: {fileID: 1300594548}
   unitScale: {x: 100, y: 20}
+  shouldDropObjects: 1
+  SPAWN_HEIGHT: 4
+  TREAD_HEIGHT: 0
 --- !u!4 &303039591
 Transform:
   m_ObjectHideFlags: 0
@@ -378,14 +383,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.13052616, y: 0, z: 0, w: 0.9914449}
+  m_LocalPosition: {x: 0, y: 7, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 15, y: 0, z: 0}
 --- !u!1 &1300594548
 GameObject:
   m_ObjectHideFlags: 0
