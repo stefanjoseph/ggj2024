@@ -4,31 +4,26 @@ using UnityEngine;
 
 public class TreddyObject : MonoBehaviour
 {
-    public float swerve_degs = 15.0f;
-    public float swerve_speed = 2.0f;
-    public Vector3 point_dir;
-    private float theta = 0f;
+    public Transform myWiggleTarget;
     private Rigidbody mybody; 
-    private Vector3 origin;
+    public Vector3 look_dir;
+    public float force_amount = 50.0f;
+    public float torque = 10.0f;
     // Start is called before the first frame update
     void Start()
     {
         mybody = GetComponent<Rigidbody>();
-        origin = transform.position;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        Vector3 point_dir = myWiggleTarget.position - transform.position;
         // Rotation BS
-        // float singleStep = swerve_speed * Time.deltaTime;
-        // point_dir = new Vector3(Mathf.Sin(Time.time * swerve_speed), 0f, Mathf.Cos(Time.time * swerve_speed));
-        // Vector3 newDirection = Vector3.RotateTowards(transform.forward, point_dir, singleStep, 0.0f);
-        // Debug.DrawRay(transform.position, newDirection, Color.red);
-        // transform.eulerAngles = point_dir;
-
-        // Translation
-        // mybody.AddForce(transform.right * Mathf.Sin(Time.time * swerve_speed) * swerve_degs);
-        mybody.MovePosition(origin + Vector3.right * Mathf.Sin(Time.time * swerve_speed) * swerve_degs);
+        look_dir = point_dir - transform.forward;
+        
+        mybody.AddForce(Vector3.right * point_dir.x * force_amount);
+        mybody.AddTorque(transform.up * torque * look_dir.x, ForceMode.Force);
+        Debug.DrawRay(transform.position, look_dir, Color.green);
     }
 }
