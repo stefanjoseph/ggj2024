@@ -54,7 +54,6 @@ public class TestMovement : MonoBehaviour
         ConstrainPlayer();
     }
 
-
     private void HandSmack()
     {
         Vector3 pos = transform.position;
