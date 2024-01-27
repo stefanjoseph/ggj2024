@@ -123,63 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &240322849
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2740420062941373999, guid: abd06a2912b0e4c519144c3362f27cf9, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2740420062941373999, guid: abd06a2912b0e4c519144c3362f27cf9, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -29.26
-      objectReference: {fileID: 0}
-    - target: {fileID: 2740420062941373999, guid: abd06a2912b0e4c519144c3362f27cf9, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 2740420062941373999, guid: abd06a2912b0e4c519144c3362f27cf9, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -10.395341
-      objectReference: {fileID: 0}
-    - target: {fileID: 2740420062941373999, guid: abd06a2912b0e4c519144c3362f27cf9, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2740420062941373999, guid: abd06a2912b0e4c519144c3362f27cf9, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2740420062941373999, guid: abd06a2912b0e4c519144c3362f27cf9, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2740420062941373999, guid: abd06a2912b0e4c519144c3362f27cf9, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2740420062941373999, guid: abd06a2912b0e4c519144c3362f27cf9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2740420062941373999, guid: abd06a2912b0e4c519144c3362f27cf9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2740420062941373999, guid: abd06a2912b0e4c519144c3362f27cf9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3264051087921462421, guid: abd06a2912b0e4c519144c3362f27cf9, type: 3}
-      propertyPath: m_Name
-      value: ramp
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: abd06a2912b0e4c519144c3362f27cf9, type: 3}
 --- !u!1 &303039589
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,6 +154,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstacle: {fileID: 5503865821867588468, guid: 81f46a677510540f1a4b810ea510c8c1, type: 3}
   fallingObstacle: {fileID: 1717669067462862111, guid: 41b8d21284a9b4c60b19a81ee0e2881d, type: 3}
+  obstacleRamp: {fileID: 3264051087921462421, guid: abd06a2912b0e4c519144c3362f27cf9, type: 3}
+  obstacleCube: {fileID: 2627969034756041738, guid: 2056e00d4421b4931bd0999ddfdcee26, type: 3}
+  obstacleArch: {fileID: 534865023001288340, guid: 8d2dbaf583228479aa2e5dd3647c38c1, type: 3}
   fallingObstacles: []
   fallenObstacles: []
   visibilityDistance: 0.6
@@ -222,6 +168,7 @@ MonoBehaviour:
   frontVantagePoint: {fileID: 1300594548}
   unitScale: {x: 100, y: 20}
   shouldDropObjects: 1
+  shouldUseRealObstacles: 1
   SPAWN_HEIGHT: 4
   TREAD_HEIGHT: 0
 --- !u!4 &303039591
@@ -237,7 +184,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &665852654
 GameObject:
@@ -268,7 +215,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
@@ -362,7 +309,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &963194225
 GameObject:
@@ -477,5 +424,5 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

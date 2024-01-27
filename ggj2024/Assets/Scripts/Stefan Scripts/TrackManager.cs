@@ -6,6 +6,9 @@ public class TrackManager : MonoBehaviour
 {
     public GameObject obstacle;
     public GameObject fallingObstacle;
+    public GameObject obstacleRamp;
+    public GameObject obstacleCube;
+    public GameObject obstacleArch;
     public List<GameObject> fallingObstacles = new();
     public List<GameObject> fallenObstacles = new();
     public float visibilityDistance;
@@ -17,6 +20,7 @@ public class TrackManager : MonoBehaviour
     public GameObject frontVantagePoint;
     public Vector2 unitScale;
     public bool shouldDropObjects;
+    public bool shouldUseRealObstacles;
     public float SPAWN_HEIGHT;
     public float TREAD_HEIGHT;
 
@@ -144,7 +148,7 @@ public class TrackManager : MonoBehaviour
     public void ConvertToStaticObstacle(GameObject obstacle)
     {
         obstacle.GetComponent<Rigidbody>().useGravity = false;
-        obstacle.GetComponent<Rigidbody>().isKinematic = false;
+        obstacle.GetComponent<Rigidbody>().isKinematic = true;
 
         obstacle.GetComponent<Obstacle>().relativePosition = ConvertToRelativePosition(DetermineExitEdgeOffsetUsingVantagePoint(obstacle.transform.position));
 
@@ -162,7 +166,7 @@ public class TrackManager : MonoBehaviour
 
     public void CreateStaticObstacle(float x, float y)
     {
-        GameObject newObstacle = Instantiate(obstacle, DetermineAbsolutePositionUsingVantagePoint(ConvertToExitEdgeOffset(x, y)), Quaternion.identity);
+        GameObject newObstacle = Instantiate(SelectObstacle(), DetermineAbsolutePositionUsingVantagePoint(ConvertToExitEdgeOffset(x, y)), Quaternion.identity);
 
         newObstacle.GetComponent<Obstacle>().relativePosition = new(x, y);
 
@@ -186,10 +190,31 @@ public class TrackManager : MonoBehaviour
 
             Vector3 spawnPointWithoutHeight = DetermineAbsolutePositionUsingVantagePoint(ConvertToExitEdgeOffset(x, y));
 
-            GameObject droppedObstacle = Instantiate(fallingObstacle, new Vector3(spawnPointWithoutHeight.x, SPAWN_HEIGHT, spawnPointWithoutHeight.z), Random.rotation);
+            GameObject droppedObstacle = Instantiate(SelectObstacle(), new Vector3(spawnPointWithoutHeight.x, SPAWN_HEIGHT, spawnPointWithoutHeight.z), Random.rotation);
             
             fallingObstacles.Add(droppedObstacle);
         }
+    }
+
+    public GameObject SelectObstacle()
+    {
+        GameObject selectedObstacle;
+        
+        if (!shouldUseRealObstacles)
+        {
+            selectedObstacle = obstacle;
+        }
+        else
+        {
+            selectedObstacle = Random.Range(0, 3) switch
+            {
+                0 => obstacleArch,
+                1 => obstacleCube,
+                _ => obstacleRamp,
+            };
+        }
+
+        return selectedObstacle;
     }
 
 }
