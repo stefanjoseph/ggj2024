@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Runtime.Remoting.Contexts;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class TestMovement : MonoBehaviour
 {
     private PlayerInputActions _input;
+
+    [SerializeField] private Image _slapIcon;
 
     [SerializeField] private float _speed = 5f;
     [SerializeField] private float _smackSpeed = 15f;
@@ -44,6 +47,19 @@ public class TestMovement : MonoBehaviour
         if (_playerCanMove == true)
         {
             transform.Translate(move * _speed * Time.deltaTime);
+        }
+
+        if (Time.time < _canSlap)
+        {
+            var tempAlpha = _slapIcon.color;
+            tempAlpha.a = 0f;
+            _slapIcon.color = tempAlpha;
+        }
+        else
+        {
+            var tempAlpha = _slapIcon.color;
+            tempAlpha.a = 1f;
+            _slapIcon.color = tempAlpha;
         }
 
         HandSmack();
@@ -92,6 +108,8 @@ public class TestMovement : MonoBehaviour
 
         transform.position = clampedPosition;
     }
+
+    
 
 }
     

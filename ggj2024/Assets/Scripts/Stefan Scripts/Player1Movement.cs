@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class Player1Movement : MonoBehaviour
 {
     private PlayerInputActions _input;
+
+    [SerializeField] private Image _slapIcon;
 
     [SerializeField] private float _speed = 5f;
     [SerializeField] private float _slapSpeed = 15f;
@@ -43,6 +46,19 @@ public class Player1Movement : MonoBehaviour
         if (_playerCanMove == true)
         {
             transform.Translate(move * _speed * Time.deltaTime);
+        }
+
+        if (Time.time < _canSlap)
+        {
+            var tempAlpha = _slapIcon.color;
+            tempAlpha.a = 0.25f;
+            _slapIcon.color = tempAlpha;
+        }
+        else
+        {
+            var tempAlpha = _slapIcon.color;
+            tempAlpha.a = 1f;
+            _slapIcon.color = tempAlpha;
         }
 
         HandSlap();
