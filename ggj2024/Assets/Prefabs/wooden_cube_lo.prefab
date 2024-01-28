@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6163987025457537981}
   m_Layer: 0
   m_Name: wooden_cube_lo
-  m_TagString: Untagged
+  m_TagString: ObjectDrop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

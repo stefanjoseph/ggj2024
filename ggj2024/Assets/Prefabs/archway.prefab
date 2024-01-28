@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 9165335528761973427}
   m_Layer: 0
   m_Name: archway
-  m_TagString: Untagged
+  m_TagString: ObjectDrop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028305, g: 0.22571313, b: 0.3069213, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1286,6 +1286,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1249421425}
+  - {fileID: 1007273014}
   m_Father: {fileID: 1698106524}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 25.068, y: 180, z: 0}
@@ -3095,7 +3096,7 @@ GameObject:
   m_Component:
   - component: {fileID: 962693182}
   - component: {fileID: 962693184}
-  - component: {fileID: 962693183}
+  - component: {fileID: 962693185}
   m_Layer: 0
   m_Name: PlaneContainer
   m_TagString: Untagged
@@ -3116,21 +3117,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 424825080}
+  - {fileID: 2004053877}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &962693183
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 962693181}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 814cd5c77cecfde4995947c63e8632d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &962693184
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3144,6 +3134,27 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10.304787, y: 1, z: 107.68876}
   m_Center: {x: 0.6204691, y: 0, z: 45.15711}
+--- !u!114 &962693185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 962693181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 855b0141da6524813b58a65decff26c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fallenObstacles: []
+  visibilityDistance: 0.6
+  exitEdgePosition: 0
+  unitsCoveredPerLoop: 0.00025
+  nearPlaneLocation: 0
+  farPlaneLocation: 0
+  exitVantagePoint: {fileID: 1825519083}
+  frontVantagePoint: {fileID: 1007273013}
+  unitScale: {x: 100, y: 20}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -3278,6 +3289,37 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &1007273013
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1007273014}
+  m_Layer: 0
+  m_Name: Front Vantage Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1007273014
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007273013}
+  m_LocalRotation: {x: -0, y: -0.97616744, z: 0.21701896, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 373482193}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1048409228
 GameObject:
   m_ObjectHideFlags: 0
@@ -4964,6 +5006,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1715456812}
   m_CullTransparentMesh: 1
+--- !u!1 &1825519083
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1825519084}
+  m_Layer: 0
+  m_Name: Exit Vantage Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1825519084
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825519083}
+  m_LocalRotation: {x: -0.21701795, y: -0, z: -0, w: 0.9761677}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1909472264}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1842906453
 GameObject:
   m_ObjectHideFlags: 0
@@ -5134,6 +5207,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 752791252}
+  - {fileID: 1825519084}
   m_Father: {fileID: 1698106524}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 25.068, y: 0, z: 0}
@@ -5494,6 +5568,58 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1988527022}
   m_CullTransparentMesh: 1
+--- !u!1 &2004053876
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2004053877}
+  - component: {fileID: 2004053878}
+  m_Layer: 0
+  m_Name: FallingObjectManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2004053877
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004053876}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 962693182}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2004053878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004053876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55e01d04b4ce44734b8ac16842ed28e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trackManager: {fileID: 962693185}
+  obstacleRamp: {fileID: 3264051087921462421, guid: abd06a2912b0e4c519144c3362f27cf9, type: 3}
+  obstacleCube: {fileID: 2627969034756041738, guid: 2056e00d4421b4931bd0999ddfdcee26, type: 3}
+  obstacleArch: {fileID: 534865023001288340, guid: 8d2dbaf583228479aa2e5dd3647c38c1, type: 3}
+  fallingObstacles: []
+  SPAWN_HEIGHT: 6
+  OBJECT_DROP_RATE_IN_SECONDS: 2
+  timeSinceLastDrop: 0
 --- !u!1 &2005146721
 GameObject:
   m_ObjectHideFlags: 0
