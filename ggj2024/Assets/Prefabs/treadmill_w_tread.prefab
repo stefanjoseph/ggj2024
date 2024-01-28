@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8298156598093495011}
   - component: {fileID: 372421232366111237}
   - component: {fileID: 4607647945978463674}
+  - component: {fileID: 3435301583834804696}
   m_Layer: 0
   m_Name: tread_lo
   m_TagString: Untagged
@@ -83,6 +84,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &3435301583834804696
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5183608708064208852}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2633397066307479601, guid: e44f01769bf3c44a4be00a8125e37aa2, type: 3}
 --- !u!1 &7492915001963252882
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,6 +109,7 @@ GameObject:
   - component: {fileID: 6474374620389781939}
   - component: {fileID: 6284941650414472540}
   - component: {fileID: 4155581995536868304}
+  - component: {fileID: 7199198731640890322}
   m_Layer: 0
   m_Name: treadmill_sides_lo
   m_TagString: Untagged
@@ -108,14 +124,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7492915001963252882}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 8.844155, z: -15.672014}
+  m_LocalRotation: {x: -0, y: 0.5558307, z: -0, w: 0.8312955}
+  m_LocalPosition: {x: -0.0000022375132, y: 8.844155, z: -15.672014}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8218502344047813235}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 67.536, z: 0}
 --- !u!33 &6284941650414472540
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -166,6 +182,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &7199198731640890322
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7492915001963252882}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7383863522665931562, guid: e44f01769bf3c44a4be00a8125e37aa2, type: 3}
 --- !u!1 &8738721580154042569
 GameObject:
   m_ObjectHideFlags: 0
