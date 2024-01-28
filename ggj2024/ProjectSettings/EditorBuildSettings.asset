@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/KENNY.unity
+    guid: 92523b2c739be47f2890098f565a97f5
+  - enabled: 1
+    path: Assets/Scenes/TitlePage.unity
+    guid: f842686649c7f5845a30b5ea1642194a
+  - enabled: 1
+    path: Assets/Scenes/CreditsPage.unity
+    guid: 85b165dfe7d70df4b8c73018e3ec306f
   m_configObjects: {}

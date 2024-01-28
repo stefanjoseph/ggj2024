@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class TrackManager : MonoBehaviour
 {
-    public GameObject obstacle;
-    public GameObject fallingObstacle;
-    public List<GameObject> fallingObstacles = new();
     public List<GameObject> fallenObstacles = new();
     public float visibilityDistance;
     public float exitEdgePosition = 0.0f;
@@ -16,9 +13,6 @@ public class TrackManager : MonoBehaviour
     public GameObject exitVantagePoint;
     public GameObject frontVantagePoint;
     public Vector2 unitScale;
-    public bool shouldDropObjects;
-    public float SPAWN_HEIGHT;
-    public float TREAD_HEIGHT;
 
     // Start is called before the first frame update
     void Start()
@@ -52,22 +46,6 @@ public class TrackManager : MonoBehaviour
                 thisObstacle.gameObject.SetActive(false);
             }
         }
-
-        for (int i = 0; i < fallingObstacles.Count; i++)
-        {
-            GameObject thisObstacle = fallingObstacles[i];
-            CheckForObstacleFreezes(thisObstacle);
-        }
-
-        if (shouldDropObjects)
-        {
-            ManuallyDropObstacle();
-        }
-        else
-        {
-            ManuallyCreateStaticObstacle();
-        }
-        
     }
 
     public bool IsObstacleWithinVisibleWindow(Obstacle obstacle)
@@ -114,7 +92,7 @@ public class TrackManager : MonoBehaviour
         float x = this.exitVantagePoint.transform.position.x + unitScale.y*exitEdgeOffset.y;
 
         // Debug.Log($"finalX:{z} finalY:{x}");
-        return new Vector3(x, 0.0f, z);
+        return new Vector3(x, this.gameObject.transform.position.y, z);
     }
 
     public Vector2 DetermineExitEdgeOffsetUsingVantagePoint(Vector3 absolutePosition)
@@ -143,53 +121,23 @@ public class TrackManager : MonoBehaviour
 
     public void ConvertToStaticObstacle(GameObject obstacle)
     {
+        Debug.Log("ConvertToStaticObstacle");
         obstacle.GetComponent<Rigidbody>().useGravity = false;
-        obstacle.GetComponent<Rigidbody>().isKinematic = false;
+        obstacle.GetComponent<Rigidbody>().isKinematic = true;
 
         obstacle.GetComponent<Obstacle>().relativePosition = ConvertToRelativePosition(DetermineExitEdgeOffsetUsingVantagePoint(obstacle.transform.position));
 
         this.fallenObstacles.Add(obstacle);
+        Debug.Log("Added fallen obstacle");
     }
 
-    public void CheckForObstacleFreezes(GameObject obstacle)
+    private void OnTriggerEnter(Collider other)
     {
-        if (obstacle.transform.position.y <= TREAD_HEIGHT)
+        if (other.tag == "ObjectDrop")
         {
-            fallingObstacles.Remove(obstacle);
-            ConvertToStaticObstacle(obstacle);
+            other.transform.parent = gameObject.transform;
+            Debug.Log("Object is Parented to the track");
+            ConvertToStaticObstacle(other.gameObject);
         }
     }
-
-    public void CreateStaticObstacle(float x, float y)
-    {
-        GameObject newObstacle = Instantiate(obstacle, DetermineAbsolutePositionUsingVantagePoint(ConvertToExitEdgeOffset(x, y)), Quaternion.identity);
-
-        newObstacle.GetComponent<Obstacle>().relativePosition = new(x, y);
-
-        this.fallenObstacles.Add(newObstacle);
-    }
-
-    public void ManuallyCreateStaticObstacle()
-    {
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            CreateStaticObstacle(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f));
-        }
-    }
-
-    public void ManuallyDropObstacle()
-    {
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            float x = Random.Range(0.0f, visibilityDistance);
-            float y = Random.Range(0.0f, 1.0f);
-
-            Vector3 spawnPointWithoutHeight = DetermineAbsolutePositionUsingVantagePoint(ConvertToExitEdgeOffset(x, y));
-
-            GameObject droppedObstacle = Instantiate(fallingObstacle, new Vector3(spawnPointWithoutHeight.x, SPAWN_HEIGHT, spawnPointWithoutHeight.z), Random.rotation);
-            
-            fallingObstacles.Add(droppedObstacle);
-        }
-    }
-
 }
