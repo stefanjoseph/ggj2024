@@ -81,6 +81,11 @@ public class PauseMenu : MonoBehaviour
         PlayerPrefs.GetFloat("SFX");
     }
 
+    public void OpenSettings()
+    {
+        _settingsMenu.SetActive(true);
+    }
+
     public void CloseSettings()
     {
         PlayerPrefs.Save();
