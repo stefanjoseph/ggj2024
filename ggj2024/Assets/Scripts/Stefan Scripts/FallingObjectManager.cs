@@ -22,6 +22,10 @@ public class FallingObjectManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     { 
+        if (Time.timeScale == 0)
+        {
+            return;
+        }
         timeSinceLastDrop += Time.deltaTime;
 
         if (timeSinceLastDrop >= OBJECT_DROP_RATE_IN_SECONDS)
@@ -33,10 +37,10 @@ public class FallingObjectManager : MonoBehaviour
 
     public void ManuallyDropObstacle()
     {
-        float x = Random.Range(0.0f, trackManager.visibilityDistance);
-        float y = Random.Range(0.0f, 1.0f);
+        float x = Random.Range(0.2f, trackManager.visibilityDistance - 0.1f);
+        float y = Random.Range(0.2f, 0.8f);
 
-        Vector3 spawnPointWithoutHeight = trackManager.DetermineAbsolutePositionUsingVantagePoint(trackManager.ConvertToExitEdgeOffset(x, y));
+        Vector3 spawnPointWithoutHeight = trackManager.DetermineAbsolutePositionUsingVantagePoint(trackManager.ConvertToExitEdgeOffset(x, y), 0);
 
         GameObject droppedObstacle = Instantiate(SelectObstacle(), new Vector3(spawnPointWithoutHeight.x, SPAWN_HEIGHT, spawnPointWithoutHeight.z), Quaternion.identity);
         

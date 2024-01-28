@@ -13,6 +13,7 @@ public class TrackManager : MonoBehaviour
     public GameObject exitVantagePoint;
     public GameObject frontVantagePoint;
     public Vector2 unitScale;
+    public float trackHeightOffset;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,11 @@ public class TrackManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Time.timeScale == 0)
+        {
+            return;
+        }
+
         this.exitEdgePosition += unitsCoveredPerLoop;
         while (exitEdgePosition > 1.0f)
         {
@@ -38,7 +44,7 @@ public class TrackManager : MonoBehaviour
             if (IsObstacleWithinVisibleWindow(obstacleComponent))
             {
                 thisObstacle.gameObject.SetActive(true);
-                Vector3 newPosition = DetermineAbsolutePositionUsingVantagePoint(ConvertToExitEdgeOffset(obstacleComponent.relativePosition));
+                Vector3 newPosition = DetermineAbsolutePositionUsingVantagePoint(ConvertToExitEdgeOffset(obstacleComponent.relativePosition), thisObstacle.gameObject.transform.position.y);
                 thisObstacle.transform.position = new Vector3(newPosition.x, newPosition.y, newPosition.z);
             }
             else
@@ -84,7 +90,7 @@ public class TrackManager : MonoBehaviour
         return ConvertToExitEdgeOffset(trackPosition.x, trackPosition.y);
     }
 
-    public Vector3 DetermineAbsolutePositionUsingVantagePoint(Vector2 exitEdgeOffset)
+    public Vector3 DetermineAbsolutePositionUsingVantagePoint(Vector2 exitEdgeOffset, float height)
     {
         // From the perspective of the exit vantage point, we are facing the positive z direction
         // Negative x is to our left and positive x is to our right
@@ -92,7 +98,7 @@ public class TrackManager : MonoBehaviour
         float x = this.exitVantagePoint.transform.position.x + unitScale.y*exitEdgeOffset.y;
 
         // Debug.Log($"finalX:{z} finalY:{x}");
-        return new Vector3(x, this.gameObject.transform.position.y, z);
+        return new Vector3(x, height, z);
     }
 
     public Vector2 DetermineExitEdgeOffsetUsingVantagePoint(Vector3 absolutePosition)
@@ -121,18 +127,18 @@ public class TrackManager : MonoBehaviour
 
     public void ConvertToStaticObstacle(GameObject obstacle)
     {
-        Debug.Log("ConvertToStaticObstacle");
         obstacle.GetComponent<Rigidbody>().useGravity = false;
         obstacle.GetComponent<Rigidbody>().isKinematic = true;
 
         obstacle.GetComponent<Obstacle>().relativePosition = ConvertToRelativePosition(DetermineExitEdgeOffsetUsingVantagePoint(obstacle.transform.position));
 
         this.fallenObstacles.Add(obstacle);
-        Debug.Log("Added fallen obstacle");
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        other.gameObject.transform.position += new Vector3(0, trackHeightOffset, 0);
+
         if (other.tag == "ObjectDrop")
         {
             other.transform.parent = gameObject.transform;
