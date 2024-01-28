@@ -19,9 +19,8 @@ public class SceneLoadManager : MonoBehaviour
 
     public void PlayGame()
     {
-
         Time.timeScale = 1.0f;
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("ALPHA");
     }
 
     public void TitleScene()

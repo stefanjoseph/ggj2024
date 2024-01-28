@@ -15,6 +15,8 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private Slider _musicSlider;
     [SerializeField] private Slider _SFXSlider;
 
+    public static bool titlePageIsActive;
+
     private bool _menuIsActive;
 
     private void Awake()
@@ -84,11 +86,15 @@ public class PauseMenu : MonoBehaviour
     public void OpenSettings()
     {
         _settingsMenu.SetActive(true);
+        _pauseMenu.SetActive(false);
     }
 
     public void CloseSettings()
     {
         PlayerPrefs.Save();
         _settingsMenu.SetActive(false);
+        _pauseMenu.SetActive(true);
     }
+
+    
 }
