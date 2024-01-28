@@ -9,7 +9,7 @@ public class FallingObjectManager : MonoBehaviour
     public GameObject obstacleCube;
     public GameObject obstacleArch;
     public List<GameObject> fallingObstacles = new();
-    public float SPAWN_HEIGHT;
+    public float X_AXIS_OFFSET;
     public float OBJECT_DROP_RATE_IN_SECONDS;
     public float timeSinceLastDrop = 0f;
 
@@ -37,12 +37,9 @@ public class FallingObjectManager : MonoBehaviour
 
     public void ManuallyDropObstacle()
     {
-        float x = Random.Range(0.2f, trackManager.visibilityDistance - 0.1f);
-        float y = Random.Range(0.2f, 0.8f);
+        float x = Random.Range(-X_AXIS_OFFSET, X_AXIS_OFFSET);
 
-        Vector3 spawnPointWithoutHeight = trackManager.DetermineAbsolutePositionUsingVantagePoint(trackManager.ConvertToExitEdgeOffset(x, y), 0);
-
-        GameObject droppedObstacle = Instantiate(SelectObstacle(), new Vector3(spawnPointWithoutHeight.x, SPAWN_HEIGHT, spawnPointWithoutHeight.z), Quaternion.identity);
+        GameObject droppedObstacle = Instantiate(SelectObstacle(), new Vector3(x, this.transform.position.y, this.transform.position.z), Quaternion.Euler(Vector3.up * 180));
         
         fallingObstacles.Add(droppedObstacle);
     }

@@ -14,6 +14,7 @@ public class TrackManager : MonoBehaviour
     public GameObject frontVantagePoint;
     public Vector2 unitScale;
     public float trackHeightOffset;
+    public float nearPlaneOffset;
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +36,7 @@ public class TrackManager : MonoBehaviour
             this.exitEdgePosition -= 1.0f;
         }
 
-        this.nearPlaneLocation = ComputeTrackPositionWithWrapAround(exitEdgePosition);
+        this.nearPlaneLocation = ComputeTrackPositionWithWrapAround(exitEdgePosition + nearPlaneOffset);
         this.farPlaneLocation = ComputeTrackPositionWithWrapAround(exitEdgePosition + visibilityDistance);
 
         foreach (GameObject thisObstacle in fallenObstacles)
@@ -75,14 +76,13 @@ public class TrackManager : MonoBehaviour
 
     public Vector2 ConvertToExitEdgeOffset(float trackPositionX, float trackPositionY)
     {
-        float nearPlaneOffsetX = trackPositionX - this.exitEdgePosition;
+        float exitEdgeOffsetX = trackPositionX - this.exitEdgePosition;
 
-        nearPlaneOffsetX = nearPlaneOffsetX < 0 ? 1.0f - this.exitEdgePosition + trackPositionX : nearPlaneOffsetX;
+        exitEdgeOffsetX = exitEdgeOffsetX < 0 ? 1.0f - this.exitEdgePosition + trackPositionX : exitEdgeOffsetX;
 
-        float nearPlaneOffsetY = trackPositionY - 0.5f;
+        float exitEdgeOffsetY = trackPositionY - 0.5f;
 
-        // Debug.Log($"nearPlaneOffsetX:{nearPlaneOffsetX} nearPlaneOffsetY:{nearPlaneOffsetY}");
-        return new Vector2(nearPlaneOffsetX, nearPlaneOffsetY);
+        return new Vector2(exitEdgeOffsetX, exitEdgeOffsetY);
     }
 
     public Vector2 ConvertToExitEdgeOffset(Vector2 trackPosition)
@@ -142,7 +142,6 @@ public class TrackManager : MonoBehaviour
         if (other.tag == "ObjectDrop")
         {
             other.transform.parent = gameObject.transform;
-            Debug.Log("Object is Parented to the track");
             ConvertToStaticObstacle(other.gameObject);
         }
     }
