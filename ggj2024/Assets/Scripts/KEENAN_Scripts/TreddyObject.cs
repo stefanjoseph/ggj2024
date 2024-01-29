@@ -15,6 +15,9 @@ public class TreddyObject : MonoBehaviour
     private bool needs_boost = false;
     private bool needs_drag = false;
     public bool needs_death = false;
+    public float y_offset = 0.1f;
+    private bool flying = false;
+    private RigidbodyConstraints og_constraints;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +25,7 @@ public class TreddyObject : MonoBehaviour
         mybody = GetComponent<Rigidbody>();
         mybody.drag = base_drag;
         wiggleTarget = myWiggleTarget.GetComponent<WiggleTarget>();
+        og_constraints = mybody.constraints;
     }
 
     public void ApplyBoost() {
@@ -36,6 +40,12 @@ public class TreddyObject : MonoBehaviour
     }
     public void ResetDrag() {
         mybody.drag = base_drag;
+    }
+    public void Fly() {
+        mybody.AddForce(Vector3.up * 10.0f, ForceMode.Impulse);
+        mybody.useGravity = true;
+        mybody.constraints = RigidbodyConstraints.None;
+        flying = true;
     }
     public void Die(Collision collision) {
         // Clear constraints
@@ -65,15 +75,29 @@ public class TreddyObject : MonoBehaviour
 
         if ( needs_death ) {
             mybody.AddForce(Vector3.forward * -50f);
+        } else {
+            // Raycast to ground
+            RaycastHit hit;
+            if(Physics.Raycast(transform.position, Vector3.down, out hit, 1.0f, 1 << LayerMask.NameToLayer("Ground"))) {
+                if (flying) {
+                    mybody.constraints = og_constraints;
+                    mybody.useGravity = false;
+                    flying = false;
+                }
+                transform.position = new Vector3(transform.position.x, hit.point.y + y_offset, transform.position.z);
+            }
         }
     }
 
     void OnCollisionEnter(Collision collision) {
-        if (collision.relativeVelocity.magnitude > 16 && !needs_death) {
-            Die(collision);
-        } else {
-            Debug.Log("Non lethal collision");
-            wiggleTarget.wander_target += Random.Range(-3.0f, 3.0f);
+        LayerMask ground_layer = LayerMask.NameToLayer ( "Ground" );
+        if (collision.gameObject.layer != ground_layer) {
+            if (collision.relativeVelocity.magnitude > 16 && !needs_death) {
+                Die(collision);
+            } else {
+                Debug.Log("Non lethal collision");
+                wiggleTarget.wander_target += Random.Range(-3.0f, 3.0f);
+            }
         }
         if (needs_death) {
             mybody.AddForce(Vector3.forward * -10f, ForceMode.Impulse);
