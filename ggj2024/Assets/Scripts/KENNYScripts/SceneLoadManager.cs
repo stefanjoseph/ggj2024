@@ -5,18 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoadManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void PlayGame()
     {
         Time.timeScale = 1.0f;
@@ -41,4 +29,10 @@ public class SceneLoadManager : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void Attributes()
+    {
+        Application.OpenURL("https://docs.google.com/document/d/1cmt5oxMAYGXtJimIhErYiBW2-qXPrWKOS0swgro2Apc/edit?usp=sharing");
+    }
+
 }
