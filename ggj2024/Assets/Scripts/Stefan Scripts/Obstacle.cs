@@ -8,6 +8,8 @@ public class Obstacle : MonoBehaviour
 
     public bool isVisible = false;
 
+    public bool isMarkedForRemoval = false;
+
     public Obstacle(float x, float y)
     {
         relativePosition.x = x;

@@ -12,38 +12,66 @@ public class Player2Controller : MonoBehaviour
 
     [SerializeField] private float _speed = 5f;
 
-    private float _canSlap = -1f;
+    private float _nextGrabTime = -1f;
+
+    public float GRAB_COOLDOWN_IN_SECONDS = 6f;
 
     public BoxCollider constrainer;
+
+    public GrabWindow grabWindow;
+
+    public GameObject currentHeldObject;
 
     private void Start()
     {
         _input = new PlayerInputActions();
         _input.Player2_V2.Enable();
-        _input.Player2_V2.Grab_Drop.performed += Drop_performed;
-
-        _playerCanMove = true;
+        _input.Player2_V2.Grab_Drop.performed += GrabOrDropPerformed;
     }
 
-    private void Drop_performed(InputAction.CallbackContext context)
+    private void GrabOrDropPerformed(InputAction.CallbackContext context)
     {
-        if (Time.time > _canSlap)
+        if (Time.time > _nextGrabTime && currentHeldObject == null && grabWindow.grabbableObject != null)
         {
-            _isSlapping = true;
-            _playerCanMove = false;
+            GrabObject(); 
         }
+        else if (currentHeldObject != null)
+        {
+            DropObject();            
+        }
+    }
+
+    private void GrabObject()
+    {
+        currentHeldObject = grabWindow.grabbableObject;
+        currentHeldObject.tag = "ObjectDrop";
+        grabWindow.grabbableObject = null;
+
+        currentHeldObject.transform.parent = gameObject.transform;
+
+        currentHeldObject.transform.position = Vector3.zero;
+        
+        currentHeldObject.GetComponent<Rigidbody>().isKinematic = false;
+    }
+
+    private void DropObject()
+    {
+        currentHeldObject.transform.parent = null;
+        currentHeldObject.GetComponent<Rigidbody>().useGravity = true;
+
+        currentHeldObject = null;
+
+        // Starts the grab cooldown rate
+        _nextGrabTime = Time.time + GRAB_COOLDOWN_IN_SECONDS;
     }
 
     private void Update()
     {
         var move = _input.Player2_V2.Movement.ReadValue<Vector3>();
 
-        if (_playerCanMove == true)
-        {
-            transform.Translate(move * _speed * Time.deltaTime);
-        }
+        transform.Translate(move * _speed * Time.deltaTime);
 
-        if (Time.time < _canSlap)
+        if (Time.time < _nextGrabTime)
         {
             var tempAlpha = _grabIcon.color;
             tempAlpha.a = 0.25f;
@@ -55,39 +83,11 @@ public class Player2Controller : MonoBehaviour
             tempAlpha.a = 1f;
             _grabIcon.color = tempAlpha;
         }
-
-        HandSlap();
     }
 
     private void LateUpdate()
     {
         ConstrainPlayer();
-    }
-
-    private void HandSlap()
-    {
-        Vector3 pos = transform.position;
-
-        //Commences Hand Slap
-        if (_isSlapping == true)
-        {
-            transform.Translate(Vector3.left * _slapSpeed * Time.deltaTime);
-        }
-
-        //Resets Player2 position when slap ends
-        if (transform.position.x <= constrainer.bounds.min.x && _isSlapping == true)
-        {
-            pos.x = constrainer.bounds.max.x;
-            transform.position = pos;
-        }
-
-        //Starts the slap cooldown rate and enables the player to freely move again
-        if (pos.x >= constrainer.bounds.max.x && _isSlapping == true)
-        {
-            _canSlap = Time.time + _slapRate;
-            _isSlapping = false;
-            _playerCanMove = true;
-        }
     }
 
     //Box collider that contsrains the Player movement within the box

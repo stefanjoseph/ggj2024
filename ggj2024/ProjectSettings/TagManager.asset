@@ -7,6 +7,7 @@ TagManager:
   - ObjectDrop
   - Player2
   - TreddyObj
+  - ObjectTrack
   layers:
   - Default
   - TransparentFX

@@ -39,6 +39,8 @@ public class TrackManager : MonoBehaviour
         this.nearPlaneLocation = ComputeTrackPositionWithWrapAround(exitEdgePosition + nearPlaneOffset);
         this.farPlaneLocation = ComputeTrackPositionWithWrapAround(exitEdgePosition + visibilityDistance);
 
+        // TakeRemovedObstaclesOffTrack();
+
         foreach (GameObject thisObstacle in fallenObstacles)
         {
             Obstacle obstacleComponent = thisObstacle.GetComponent<Obstacle>();
@@ -127,6 +129,8 @@ public class TrackManager : MonoBehaviour
 
     public void ConvertToStaticObstacle(GameObject obstacle)
     {
+        obstacle.tag = "ObjectTrack";
+
         obstacle.GetComponent<Rigidbody>().useGravity = false;
         obstacle.GetComponent<Rigidbody>().isKinematic = true;
 
@@ -145,4 +149,23 @@ public class TrackManager : MonoBehaviour
             ConvertToStaticObstacle(other.gameObject);
         }
     }
+
+    private bool isObstacleMarkedForRemoval(GameObject obstacleObj)
+    {
+        Obstacle obstacle = obstacleObj.GetComponent<Obstacle>();
+        return obstacle.isMarkedForRemoval;
+    }
+
+    public void TakeRemovedObstaclesOffTrack()
+    {
+        // fallenObstacles.RemoveAll(isObstacleMarkedForRemoval)
+        // {
+        //     Obstacle obstacleComponent = thisObstacle.GetComponent<Obstacle>();
+        //     if (obstacleComponent.isMarkedForRemoval)
+        //     {
+
+        //     }
+        // }
+    }
+
 }

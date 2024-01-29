@@ -20,27 +20,11 @@ public class GrabWindow : MonoBehaviour
     }
 
     void OnTriggerStay(Collider other) {
-        if (other.CompareTag("Player")
+        if (other.CompareTag("ObjectTrack"))
         {
-            isInBox = true;
+            grabbableObject = other.gameObject;
         }
     }
-    void OnTriggerExit(Collider other) {
-        if(other.CompareTag("Player")
-        {
-            isInBox = false;
-        }
-    }
-}
 
-
-public bool isInBox;
- 
-void Update(){
-    if(isInBox){
-        Debug.Log("Found in box!");
-    } else {
-        Debug.Log("Not in box!");
-    }
 }
  
