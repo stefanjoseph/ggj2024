@@ -13,7 +13,6 @@ public class TrackManager : MonoBehaviour
     public GameObject exitVantagePoint;
     public GameObject frontVantagePoint;
     public Vector2 unitScale;
-    public float trackHeightOffset;
     public float nearPlaneOffset;
 
     // Start is called before the first frame update
@@ -39,7 +38,7 @@ public class TrackManager : MonoBehaviour
         this.nearPlaneLocation = ComputeTrackPositionWithWrapAround(exitEdgePosition + nearPlaneOffset);
         this.farPlaneLocation = ComputeTrackPositionWithWrapAround(exitEdgePosition + visibilityDistance);
 
-        // TakeRemovedObstaclesOffTrack();
+        TakeRemovedObstaclesOffTrack();
 
         foreach (GameObject thisObstacle in fallenObstacles)
         {
@@ -129,28 +128,28 @@ public class TrackManager : MonoBehaviour
 
     public void ConvertToStaticObstacle(GameObject obstacle)
     {
-        obstacle.tag = "ObjectTrack";
-
         obstacle.GetComponent<Rigidbody>().useGravity = false;
         obstacle.GetComponent<Rigidbody>().isKinematic = true;
 
-        obstacle.GetComponent<Obstacle>().relativePosition = ConvertToRelativePosition(DetermineExitEdgeOffsetUsingVantagePoint(obstacle.transform.position));
+        Obstacle obstacleComponent = obstacle.GetComponent<Obstacle>();
+
+        obstacle.gameObject.transform.position += new Vector3(0, obstacleComponent.TRACK_OFFSET, 0);
+
+        obstacleComponent.relativePosition = ConvertToRelativePosition(DetermineExitEdgeOffsetUsingVantagePoint(obstacle.transform.position));
 
         this.fallenObstacles.Add(obstacle);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        other.gameObject.transform.position += new Vector3(0, trackHeightOffset, 0);
-
-        if (other.tag == "ObjectDrop")
+        if (!other.GetComponent<Obstacle>().isOnTrack)
         {
-            other.transform.parent = gameObject.transform;
+            other.GetComponent<Obstacle>().isOnTrack = true;
             ConvertToStaticObstacle(other.gameObject);
         }
     }
 
-    private bool isObstacleMarkedForRemoval(GameObject obstacleObj)
+    private bool IsObstacleMarkedForRemoval(GameObject obstacleObj)
     {
         Obstacle obstacle = obstacleObj.GetComponent<Obstacle>();
         return obstacle.isMarkedForRemoval;
@@ -158,14 +157,7 @@ public class TrackManager : MonoBehaviour
 
     public void TakeRemovedObstaclesOffTrack()
     {
-        // fallenObstacles.RemoveAll(isObstacleMarkedForRemoval)
-        // {
-        //     Obstacle obstacleComponent = thisObstacle.GetComponent<Obstacle>();
-        //     if (obstacleComponent.isMarkedForRemoval)
-        //     {
-
-        //     }
-        // }
+        fallenObstacles.RemoveAll(IsObstacleMarkedForRemoval);
     }
 
 }

@@ -10,6 +10,12 @@ public class Obstacle : MonoBehaviour
 
     public bool isMarkedForRemoval = false;
 
+    public bool isOnTrack = false;
+
+    public float GRAB_OFFSET;
+
+    public float TRACK_OFFSET;
+
     public Obstacle(float x, float y)
     {
         relativePosition.x = x;

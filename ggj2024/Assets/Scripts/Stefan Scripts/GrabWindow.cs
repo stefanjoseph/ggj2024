@@ -20,9 +20,14 @@ public class GrabWindow : MonoBehaviour
     }
 
     void OnTriggerStay(Collider other) {
-        if (other.CompareTag("ObjectTrack"))
+        if (other != null)
         {
-            grabbableObject = other.gameObject;
+            Obstacle potentialComponent = other.GetComponent<Obstacle>();
+    
+            if (potentialComponent != null && potentialComponent.isOnTrack)
+            {
+                grabbableObject = other.gameObject;
+            }
         }
     }
 

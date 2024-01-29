@@ -100,6 +100,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   relativePosition: {x: 0, y: 0}
   isVisible: 0
+  isMarkedForRemoval: 0
+  isOnTrack: 0
+  GRAB_OFFSET: 2
+  TRACK_OFFSET: 0.2
 --- !u!64 &-1403567751817273583
 MeshCollider:
   m_ObjectHideFlags: 0

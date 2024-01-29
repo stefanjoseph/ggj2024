@@ -102,6 +102,9 @@ MonoBehaviour:
   relativePosition: {x: 0, y: 0}
   isVisible: 0
   isMarkedForRemoval: 0
+  isOnTrack: 0
+  GRAB_OFFSET: 1
+  TRACK_OFFSET: 0.5
 --- !u!64 &6197736215987266579
 MeshCollider:
   m_ObjectHideFlags: 0
