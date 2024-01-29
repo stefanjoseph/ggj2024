@@ -3652,7 +3652,7 @@ MonoBehaviour:
   fallenObstacles: []
   visibilityDistance: 0.4
   exitEdgePosition: 0
-  unitsCoveredPerLoop: 0.00025
+  UNITS_COVERED_PER_SECOND: 0.1
   nearPlaneLocation: 0
   farPlaneLocation: 0
   exitVantagePoint: {fileID: 1825519083}
