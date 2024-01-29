@@ -338,7 +338,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""93e02fd5-0e22-4ebd-8e2f-7392baa422ca"",
-                    ""path"": ""<Keyboard>/x"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -585,30 +585,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Forward"",
-                    ""id"": ""d60b7087-8c52-47a7-8692-92e565378e69"",
-                    ""path"": ""<Keyboard>/numpad1"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""Forward"",
                     ""id"": ""8288c22a-215d-450a-a8c6-142c6ccf3a99"",
-                    ""path"": ""<Keyboard>/k"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""Backward"",
-                    ""id"": ""367678fa-254e-4a0b-a4d3-01b1d3e30c78"",
-                    ""path"": ""<Keyboard>/numpad4"",
+                    ""path"": ""<Keyboard>/enter"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -619,7 +597,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Backward"",
                     ""id"": ""763c23b1-ed48-43f3-a49b-c90f76648ccf"",
-                    ""path"": ""<Keyboard>/m"",
+                    ""path"": ""<Keyboard>/rightShift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -630,7 +608,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""b61e1eec-13e1-4ef0-a73b-d2626c313261"",
-                    ""path"": ""<Keyboard>/rightShift"",
+                    ""path"": ""<Keyboard>/backslash"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
