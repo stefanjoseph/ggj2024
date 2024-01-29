@@ -78,7 +78,7 @@ public class TreddyObject : MonoBehaviour
         } else {
             // Raycast to ground
             RaycastHit hit;
-            if(Physics.Raycast(transform.position, Vector3.down, out hit, 1.0f, 1 << LayerMask.NameToLayer("Ground"))) {
+            if(Physics.Raycast(transform.position + Vector3.forward * 0.1f, Vector3.down, out hit, 1.0f, 1 << LayerMask.NameToLayer("Ground"))) {
                 if (flying) {
                     mybody.constraints = og_constraints;
                     mybody.useGravity = false;

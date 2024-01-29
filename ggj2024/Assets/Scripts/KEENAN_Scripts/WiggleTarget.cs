@@ -17,7 +17,7 @@ public class WiggleTarget : MonoBehaviour
     {
         origin = transform.position;
         z_offs = origin.z - transform.parent.position.z;
-        wander_target = transform.parent.position.x;
+        wander_target = transform.position.x - transform.parent.position.x;
         time_offs = Random.Range(0.0f,10.0f);
         swerve_speed_wiggle = Random.Range(-0.5f,0.5f);
         swerve_speed_wiggle = Random.Range(-0.5f,0.5f);
