@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class IntroGameBehavior : MonoBehaviour
 {
@@ -10,24 +11,25 @@ public class IntroGameBehavior : MonoBehaviour
     [SerializeField] private GameObject _readyTitle;
     [SerializeField] private GameObject _startTitle;
     [SerializeField] private GameObject _hud;
-    // Start is called before the first frame update
+    [SerializeField] private GameObject _readyStartContainer;
+
+    [SerializeField] private Image _blackOverlay;
+
+    private bool _startGame;
+
     void Start()
     {
-        //_readyAnim = GetComponent<Animation>();
-        //_startAnim = GetComponent<Animation>();
-
-        StartCoroutine(BeginGameRoutine());
-
+        //StartCoroutine(BeginGameRoutine());
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        FadeToBlack();
     }
-
     IEnumerator BeginGameRoutine()
     {
+
+        Debug.Log("Entered Coroutine");
         _readyTitle.SetActive(true);
 
         yield return new WaitForSeconds(3f);
@@ -37,9 +39,21 @@ public class IntroGameBehavior : MonoBehaviour
         yield return new WaitForSeconds(3f);
         _startTitle.SetActive(false);
         _hud.SetActive(true);
+        _readyStartContainer.SetActive(false);
 
         //Set bool to start the game
+    }
 
+    private void FadeToBlack()
+    {
+        var tempAlpha = _blackOverlay.color;
+        //tempAlpha.a = 1f;
+        tempAlpha.a -= 0.33f * Time.deltaTime;
+        _blackOverlay.color = tempAlpha;
 
+        if (tempAlpha.a <= 0f)
+        {
+            StartCoroutine(BeginGameRoutine());
+        }
     }
 }

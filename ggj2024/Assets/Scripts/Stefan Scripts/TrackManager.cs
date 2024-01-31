@@ -144,6 +144,7 @@ public class TrackManager : MonoBehaviour
     {
         if (!other.GetComponent<Obstacle>().isOnTrack)
         {
+            //Add SFX Here?
             other.GetComponent<Obstacle>().isOnTrack = true;
             ConvertToStaticObstacle(other.gameObject);
         }

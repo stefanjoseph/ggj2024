@@ -8,6 +8,8 @@ TagManager:
   - Player2
   - TreddyObj
   - ObjectTrack
+  - Player1Object
+  - Player2Object
   layers:
   - Default
   - TransparentFX
