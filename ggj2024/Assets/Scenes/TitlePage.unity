@@ -1817,7 +1817,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 990844390}
         m_TargetAssemblyTypeName: SceneLoadManager, Assembly-CSharp
-        m_MethodName: PlayGame
+        m_MethodName: PlayerSelect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

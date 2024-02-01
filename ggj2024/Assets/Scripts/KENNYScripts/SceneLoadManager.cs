@@ -40,6 +40,13 @@ public class SceneLoadManager : MonoBehaviour
         
     }
 
+    public void PlayerSelect()
+    {
+        Time.timeScale = 1f;
+
+        SceneManager.LoadScene("PlayerSelect");
+    }
+
     public void TitleScene()
     {
 
@@ -64,8 +71,4 @@ public class SceneLoadManager : MonoBehaviour
         Application.OpenURL("https://docs.google.com/document/d/1cmt5oxMAYGXtJimIhErYiBW2-qXPrWKOS0swgro2Apc/edit?usp=sharing");
     }
 
-    private void BlackFade()
-    {
-        
-    }
 }
