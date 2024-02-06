@@ -142,7 +142,7 @@ public class TrackManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.GetComponent<Obstacle>().isOnTrack)
+        if (!(other.GetComponent<Obstacle>() == null) && !other.GetComponent<Obstacle>().isOnTrack)
         {
             //Add SFX Here?
             other.GetComponent<Obstacle>().isOnTrack = true;
