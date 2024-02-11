@@ -771,8 +771,8 @@ RectTransform:
   - {fileID: 1513957601}
   - {fileID: 1294476083}
   - {fileID: 1322243473}
-  - {fileID: 1303776298}
   - {fileID: 449897149}
+  - {fileID: 1303776298}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -813,7 +813,7 @@ RectTransform:
   - {fileID: 2044823771}
   - {fileID: 1549756020}
   m_Father: {fileID: 426605109}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -834,8 +834,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   results: {fileID: 196283586}
   shouldSetPlayer1: 0
-  player1Offset: {x: 30, y: 0, z: 0}
-  player2Offset: {x: -30, y: 0, z: 0}
+  player1Offset: {x: 30, y: 30, z: 0}
+  player2Offset: {x: -30, y: -30, z: 0}
   startButton: {fileID: 1322243474}
   gmoOrangeIcon: {fileID: 1481022899}
   ogOrangeIcon: {fileID: 244050835}
@@ -1637,7 +1637,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 426605109}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
