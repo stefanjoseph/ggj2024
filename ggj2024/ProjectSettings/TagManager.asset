@@ -10,6 +10,8 @@ TagManager:
   - ObjectTrack
   - Player1Object
   - Player2Object
+  - TitleMusic
+  - PlayerSelectResults
   layers:
   - Default
   - TransparentFX
