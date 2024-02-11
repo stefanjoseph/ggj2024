@@ -133,7 +133,7 @@ public class TrackManager : MonoBehaviour
 
         Obstacle obstacleComponent = obstacle.GetComponent<Obstacle>();
 
-        obstacle.gameObject.transform.position += new Vector3(0, obstacleComponent.TRACK_OFFSET, 0);
+        obstacle.gameObject.transform.position = new Vector3(obstacle.gameObject.transform.position.x, obstacleComponent.TRACK_OFFSET, obstacle.gameObject.transform.position.z);
 
         obstacleComponent.relativePosition = ConvertToRelativePosition(DetermineExitEdgeOffsetUsingVantagePoint(obstacle.transform.position));
 
