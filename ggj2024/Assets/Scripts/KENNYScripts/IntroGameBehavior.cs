@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class IntroGameBehavior : MonoBehaviour
 {
-    //[SerializeField] private Animation _readyAnim;
-    //[SerializeField] private Animation _startAnim;
 
     [SerializeField] private GameObject _readyTitle;
     [SerializeField] private GameObject _startTitle;
@@ -55,5 +53,10 @@ public class IntroGameBehavior : MonoBehaviour
         {
             StartCoroutine(BeginGameRoutine());
         }
+    }
+
+    private void AssignIcons()
+    {
+
     }
 }
