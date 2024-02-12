@@ -29,9 +29,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3264051087921462421}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -16.44879, y: 0.13540128, z: -4.2732973}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: -16.44879, y: 0.14, z: -4.2732973}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2954911644447905433}
   m_Father: {fileID: 0}
@@ -145,6 +145,18 @@ PrefabInstance:
     - target: {fileID: 8214756386891698818, guid: a42e5b7758de04d14a7ed46fd455db97, type: 3}
       propertyPath: m_Name
       value: RampTrigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 8214756386891698820, guid: a42e5b7758de04d14a7ed46fd455db97, type: 3}
+      propertyPath: m_Size.x
+      value: 1.0784034
+      objectReference: {fileID: 0}
+    - target: {fileID: 8214756386891698820, guid: a42e5b7758de04d14a7ed46fd455db97, type: 3}
+      propertyPath: m_Size.y
+      value: 0.9999999
+      objectReference: {fileID: 0}
+    - target: {fileID: 8214756386891698820, guid: a42e5b7758de04d14a7ed46fd455db97, type: 3}
+      propertyPath: m_Center.x
+      value: -0.00031835583
       objectReference: {fileID: 0}
     - target: {fileID: 8214756386891698821, guid: a42e5b7758de04d14a7ed46fd455db97, type: 3}
       propertyPath: m_RootOrder

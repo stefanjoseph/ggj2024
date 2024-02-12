@@ -12,6 +12,10 @@ public class FallingObjectManager : MonoBehaviour
     public float X_AXIS_OFFSET;
     public float OBJECT_DROP_RATE_IN_SECONDS;
     public float timeSinceLastDrop = 0f;
+    public bool shouldUseEqualProbability;
+    public int ODDS_RAMP;
+    public int ODDS_ARCH;
+    public bool shouldNotIncrementTime;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +26,7 @@ public class FallingObjectManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     { 
-        if (Time.timeScale == 0)
+        if (Time.timeScale == 0 || shouldNotIncrementTime)
         {
             return;
         }
@@ -48,12 +52,31 @@ public class FallingObjectManager : MonoBehaviour
     {
         GameObject selectedObstacle;
         
-        selectedObstacle = Random.Range(0, 3) switch
+        if (shouldUseEqualProbability)
         {
-            0 => obstacleArch,
-            1 => obstacleCube,
-            _ => obstacleRamp,
-        };
+            selectedObstacle = Random.Range(0, 3) switch
+            {
+                0 => obstacleArch,
+                1 => obstacleCube,
+                _ => obstacleRamp,
+            };
+        }
+        else
+        {
+            int selectionSeed = Random.Range(0, 100);
+            if (selectionSeed < ODDS_ARCH)
+            {
+                selectedObstacle = obstacleArch;
+            }
+            else if (selectionSeed < ODDS_ARCH + ODDS_RAMP)
+            {
+                selectedObstacle = obstacleRamp;
+            }
+            else
+            {
+                selectedObstacle = obstacleCube;
+            }
+        }
     
         return selectedObstacle;
     }
