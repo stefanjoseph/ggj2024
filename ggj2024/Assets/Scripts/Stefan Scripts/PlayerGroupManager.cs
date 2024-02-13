@@ -6,7 +6,6 @@ using static ObjectSelectionManager;
 public class PlayerGroupManager : MonoBehaviour
 {
     public bool shouldLookAtPlayer1Result;
-    public PlayerSelectResults selectResults;
     public GameObject gmoOrange;
     public GameObject ogOrange;
     public GameObject kart;
@@ -15,7 +14,7 @@ public class PlayerGroupManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        selectResults = GameObject.FindGameObjectWithTag("PlayerSelectResults").GetComponent<PlayerSelectResults>();
+        PlayerSelectResults selectResults = GameObject.FindGameObjectWithTag("PlayerSelectResults").GetComponent<PlayerSelectResults>();
 
         ObjectSelection selection;
 

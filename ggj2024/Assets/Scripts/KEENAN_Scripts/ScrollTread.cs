@@ -7,6 +7,7 @@ public class ScrollTread : MonoBehaviour
     // Start is called before the first frame update
     private Renderer myRenderer;
     public Vector2 scrollAmount;
+    public TrackSpeedMultiplier trackSpeedMultiplier;
     void Start()
     {
         myRenderer = GetComponent<Renderer>();
@@ -15,6 +16,6 @@ public class ScrollTread : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        myRenderer.material.mainTextureOffset = scrollAmount * Time.time;
+        myRenderer.material.mainTextureOffset = trackSpeedMultiplier.value * scrollAmount * Time.time;
     }
 }

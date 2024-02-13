@@ -8,6 +8,7 @@ public class TrackManager : MonoBehaviour
     public float visibilityDistance;
     public float exitEdgePosition = 0.0f;
     public float UNITS_COVERED_PER_SECOND;
+    public TrackSpeedMultiplier trackSpeedMultiplier;
     public float nearPlaneLocation;
     public float farPlaneLocation;
     public GameObject exitVantagePoint;
@@ -29,7 +30,7 @@ public class TrackManager : MonoBehaviour
             return;
         }
 
-        this.exitEdgePosition += UNITS_COVERED_PER_SECOND*Time.deltaTime;
+        this.exitEdgePosition += trackSpeedMultiplier.value*UNITS_COVERED_PER_SECOND*Time.deltaTime;
         while (exitEdgePosition > 1.0f)
         {
             this.exitEdgePosition -= 1.0f;

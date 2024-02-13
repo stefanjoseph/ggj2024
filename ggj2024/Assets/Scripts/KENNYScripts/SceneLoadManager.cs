@@ -49,6 +49,7 @@ public class SceneLoadManager : MonoBehaviour
 
     public void TitleScene()
     {
+        Destroy(GameObject.FindGameObjectWithTag("PlayerSelectResults"));
 
         Time.timeScale = 1.0f;
         SceneManager.LoadScene("TitlePage");
