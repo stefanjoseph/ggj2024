@@ -10,11 +10,17 @@ public class Obstacle : MonoBehaviour
 
     public bool isMarkedForRemoval = false;
 
+    public bool isMarkedForPermanentRemoval = false;
+
+    public bool shouldDestroy = false;
+
     public bool isOnTrack = false;
 
     public float GRAB_OFFSET;
 
     public float TRACK_OFFSET;
+
+    public TrackManager trackManager;
 
     public Obstacle(float x, float y)
     {
@@ -25,12 +31,15 @@ public class Obstacle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        trackManager = GameObject.FindGameObjectWithTag("TrackManager").GetComponent<TrackManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (shouldDestroy)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

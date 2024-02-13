@@ -154,6 +154,9 @@ public class TrackManager : MonoBehaviour
     private bool IsObstacleMarkedForRemoval(GameObject obstacleObj)
     {
         Obstacle obstacle = obstacleObj.GetComponent<Obstacle>();
+
+        obstacle.shouldDestroy = obstacle.isMarkedForPermanentRemoval;
+        
         return obstacle.isMarkedForRemoval;
     }
 

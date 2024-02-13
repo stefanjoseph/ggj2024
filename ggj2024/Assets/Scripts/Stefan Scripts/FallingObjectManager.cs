@@ -15,7 +15,7 @@ public class FallingObjectManager : MonoBehaviour
     public bool shouldUseEqualProbability;
     public int ODDS_RAMP;
     public int ODDS_ARCH;
-    public bool shouldNotIncrementTime;
+    public bool shouldIncrementTime;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +26,7 @@ public class FallingObjectManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     { 
-        if (Time.timeScale == 0 || shouldNotIncrementTime)
+        if (Time.timeScale == 0 || !shouldIncrementTime)
         {
             return;
         }

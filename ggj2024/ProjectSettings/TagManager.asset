@@ -12,6 +12,8 @@ TagManager:
   - Player2Object
   - TitleMusic
   - PlayerSelectResults
+  - MagicBeans
+  - TrackManager
   layers:
   - Default
   - TransparentFX

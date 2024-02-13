@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class IntroGameBehavior : MonoBehaviour
 {
     public FallingObjectManager fallingObjectManager;
+    public EventTimer eventTimer;
     [SerializeField] private GameObject _readyTitle;
     [SerializeField] private GameObject _startTitle;
     [SerializeField] private GameObject _hud;
@@ -27,7 +28,6 @@ public class IntroGameBehavior : MonoBehaviour
     IEnumerator BeginGameRoutine()
     {
 
-        Debug.Log("Entered Coroutine");
         _readyTitle.SetActive(true);
 
         yield return new WaitForSeconds(3f);
@@ -41,7 +41,8 @@ public class IntroGameBehavior : MonoBehaviour
         _readyStartContainer.SetActive(false);
 
         //Set bool to start the game
-        fallingObjectManager.shouldNotIncrementTime = false;
+        fallingObjectManager.shouldIncrementTime = true;
+        eventTimer.shouldIncrementTime = true;
     }
 
     private void FadeToBlack()
