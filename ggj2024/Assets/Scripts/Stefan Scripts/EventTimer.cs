@@ -25,6 +25,8 @@ public class EventTimer : MonoBehaviour
     public float SLOW_TIMER_INTERVAL_IN_SECONDS;
     public float SLOW_MULTIPLIER;
 
+    public AudioSource laughTrack;
+
     private void Start()
     {
         _timerIsRunning = true;
@@ -70,7 +72,6 @@ public class EventTimer : MonoBehaviour
                 _timerIsRunning = false;
 
                 SelectSpecialEvent();
-
             }
         }
         else
@@ -105,6 +106,8 @@ public class EventTimer : MonoBehaviour
             magicBeans.shouldBeFloating = true;
             timeText.text = "M A G I C  B E A N S";
         }
+
+        laughTrack.Play();
     }
 
 }

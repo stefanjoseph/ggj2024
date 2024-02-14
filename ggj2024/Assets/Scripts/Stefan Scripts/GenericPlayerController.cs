@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -23,6 +20,10 @@ public class GenericPlayerController : MonoBehaviour
 
     public GameObject currentHeldObject;
 
+    public AudioSource grabSound;
+
+    public AudioSource dropSound;
+
     protected void GrabOrDropPerformed(InputAction.CallbackContext context)
     {
         if (Time.time > _nextGrabTime && currentHeldObject == null && grabWindow.grabbableObject != null)
@@ -38,6 +39,9 @@ public class GenericPlayerController : MonoBehaviour
     private void GrabObject()
     {
         Debug.Log("Initiating grab");
+        
+        grabSound.Play();
+
         currentHeldObject = grabWindow.grabbableObject;
 
         Obstacle obstacleComponent = currentHeldObject.GetComponent<Obstacle>();
@@ -57,6 +61,9 @@ public class GenericPlayerController : MonoBehaviour
     private void DropObject()
     {
         Debug.Log("Initiating drop");
+        
+        dropSound.Play();
+
         currentHeldObject.transform.parent = null;
         currentHeldObject.GetComponent<Obstacle>().isMarkedForRemoval = false;
         currentHeldObject.GetComponent<Rigidbody>().useGravity = true;

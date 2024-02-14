@@ -16,7 +16,7 @@ public class TitlePageNavigation : MonoBehaviour
     [SerializeField] private Slider _musicSlider;
     [SerializeField] private Slider _SFXSlider;
 
-
+    [SerializeField] private AudioSource clickSound;
 
     private void Awake()
     {
@@ -49,6 +49,7 @@ public class TitlePageNavigation : MonoBehaviour
     {
         _titleOptions.SetActive(false);
         _settingsMenu.SetActive(true);
+        clickSound.Play();
     }
 
     public void CloseSettings()
@@ -56,7 +57,7 @@ public class TitlePageNavigation : MonoBehaviour
         PlayerPrefs.Save();
         _settingsMenu.SetActive(false);
         _titleOptions.SetActive(true);
-
+        clickSound.Play();
     }
 }
 

@@ -24,6 +24,7 @@ public class ObjectSelectionManager : MonoBehaviour
     public GameObject goKartIcon;
     public GameObject player1Selector;
     public GameObject player2Selector;
+    public AudioSource clickSound;
 
     // Start is called before the first frame update
     void Start()
@@ -49,6 +50,7 @@ public class ObjectSelectionManager : MonoBehaviour
             results.player2 = ObjectSelection.OG_ORANGE;
             player2Selector.gameObject.transform.position = ogOrangeIcon.gameObject.transform.position + player2Offset;
         }
+        clickSound.Play();
     }
 
     public void SelectGMOOrange()
@@ -63,6 +65,7 @@ public class ObjectSelectionManager : MonoBehaviour
             results.player2 = ObjectSelection.GMO_ORANGE;
             player2Selector.gameObject.transform.position = gmoOrangeIcon.gameObject.transform.position + player2Offset;
         }
+        clickSound.Play();
     }
 
     public void SelectKart()
@@ -77,6 +80,7 @@ public class ObjectSelectionManager : MonoBehaviour
             results.player2 = ObjectSelection.GO_KART;
             player2Selector.gameObject.transform.position = goKartIcon.gameObject.transform.position + player2Offset;
         }
+        clickSound.Play();
     }
 
     public void SelectTape()
@@ -91,6 +95,7 @@ public class ObjectSelectionManager : MonoBehaviour
             results.player2 = ObjectSelection.TAPE;
             player2Selector.gameObject.transform.position = tapeIcon.gameObject.transform.position + player2Offset;
         }
+        clickSound.Play();
     }
 
     public bool ShouldUpdatePlayer1()

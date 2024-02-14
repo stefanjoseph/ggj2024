@@ -15,6 +15,9 @@ public class TrackManager : MonoBehaviour
     public GameObject frontVantagePoint;
     public Vector2 unitScale;
     public float nearPlaneOffset;
+    public AudioSource spawnSound;
+    public AudioSource despawnSound;
+    public AudioSource staticObstacleSound;
 
     // Start is called before the first frame update
     void Start()
@@ -47,6 +50,10 @@ public class TrackManager : MonoBehaviour
             if (IsObstacleWithinVisibleWindow(obstacleComponent))
             {
                 // If it was inactive, play spawn SFX
+                if (!thisObstacle.gameObject.activeSelf)
+                {
+                    spawnSound.Play();
+                }
                 thisObstacle.gameObject.SetActive(true);
                 Vector3 newPosition = DetermineAbsolutePositionUsingVantagePoint(ConvertToExitEdgeOffset(obstacleComponent.relativePosition), thisObstacle.gameObject.transform.position.y);
                 thisObstacle.transform.position = new Vector3(newPosition.x, newPosition.y, newPosition.z);
@@ -54,6 +61,10 @@ public class TrackManager : MonoBehaviour
             else
             {
                 // If it was active, play despawn SFX
+                if (thisObstacle.gameObject.activeSelf)
+                {
+                    despawnSound.Play();
+                }
                 thisObstacle.gameObject.SetActive(false);
             }
         }
@@ -147,7 +158,7 @@ public class TrackManager : MonoBehaviour
     {
         if (!(other.GetComponent<Obstacle>() == null) && !other.GetComponent<Obstacle>().isOnTrack)
         {
-            //Add SFX Here?
+            staticObstacleSound.Play();
             other.GetComponent<Obstacle>().isOnTrack = true;
             ConvertToStaticObstacle(other.gameObject);
         }

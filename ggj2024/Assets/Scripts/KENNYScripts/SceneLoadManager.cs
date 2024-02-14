@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class SceneLoadManager : MonoBehaviour
 {
     [SerializeField] private Image _blackOverlay;
+    [SerializeField] private AudioSource clickSound;
 
     private bool _fadeIsActive;
     private bool _loadPlayGame;
@@ -37,20 +38,24 @@ public class SceneLoadManager : MonoBehaviour
         {
             SceneManager.LoadScene("ALPHA");
         }
+        else
+        {
+            clickSound.Play();
+        }
         
     }
 
     public void PlayerSelect()
     {
         Time.timeScale = 1f;
-
+        clickSound.Play();
         SceneManager.LoadScene("PlayerSelect");
     }
 
     public void TitleScene()
     {
         Destroy(GameObject.FindGameObjectWithTag("PlayerSelectResults"));
-
+        clickSound.Play();
         Time.timeScale = 1.0f;
         SceneManager.LoadScene("TitlePage");
         
@@ -58,17 +63,20 @@ public class SceneLoadManager : MonoBehaviour
 
     public void CreditsPage()
     {
+        clickSound.Play();
         Time.timeScale = 1.0f;
         SceneManager.LoadScene("CreditsPage");
     }
 
     public void QuitGame()
     {
+        clickSound.Play();
         Application.Quit();
     }
 
     public void Attributes()
     {
+        clickSound.Play();
         Application.OpenURL("https://docs.google.com/document/d/1cmt5oxMAYGXtJimIhErYiBW2-qXPrWKOS0swgro2Apc/edit?usp=sharing");
     }
 
