@@ -270,28 +270,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""Up"",
-                    ""id"": ""e542ddbd-2704-4701-82c5-ed9a717ea272"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""Down"",
-                    ""id"": ""788f6110-e212-4cc6-8fe8-3b9a15467283"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
                     ""name"": ""Left"",
                     ""id"": ""3504c4b9-6b66-45e3-99ec-0c8cfda82dea"",
                     ""path"": ""<Keyboard>/a"",
@@ -316,7 +294,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Forward"",
                     ""id"": ""a33942f3-2dc9-46e8-a997-8eb881f42045"",
-                    ""path"": ""<Keyboard>/r"",
+                    ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -327,7 +305,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Backward"",
                     ""id"": ""40e526e8-ece2-421d-bb51-7b9148d978cc"",
-                    ""path"": ""<Keyboard>/f"",
+                    ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -540,28 +518,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""Up"",
-                    ""id"": ""172f310d-1454-4b2e-9da5-55f5104058ab"",
-                    ""path"": ""<Keyboard>/upArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""Down"",
-                    ""id"": ""cfedc445-afdc-4fb5-bb19-13d92698b440"",
-                    ""path"": ""<Keyboard>/downArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
                     ""name"": ""Left"",
                     ""id"": ""e9f7af51-f347-453e-8942-a1c8528b2176"",
                     ""path"": ""<Keyboard>/leftArrow"",
@@ -586,7 +542,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Forward"",
                     ""id"": ""8288c22a-215d-450a-a8c6-142c6ccf3a99"",
-                    ""path"": ""<Keyboard>/enter"",
+                    ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -597,7 +553,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Backward"",
                     ""id"": ""763c23b1-ed48-43f3-a49b-c90f76648ccf"",
-                    ""path"": ""<Keyboard>/rightShift"",
+                    ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -608,7 +564,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""b61e1eec-13e1-4ef0-a73b-d2626c313261"",
-                    ""path"": ""<Keyboard>/backslash"",
+                    ""path"": ""<Keyboard>/enter"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

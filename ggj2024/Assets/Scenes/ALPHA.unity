@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.45118457, g: 0.33452162, b: 0.16275162, a: 1}
+  m_IndirectSpecularColor: {r: 0.506642, g: 0.38562796, b: 0.20655511, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2054,7 +2054,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 382921943}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 6, z: 7.141}
+  m_LocalPosition: {x: 0, y: 7, z: 7.141}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3074,10 +3074,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Move - Arrow Keys, Enter, Right Shift
+  m_text: 'Move - Arrow Keys
 
 
-    Pick Up / Drop Object - Backslash'
+    Pick Up / Drop Object - Enter'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 345f61fd375dc8f448119073f0394ada, type: 2}
   m_sharedMaterial: {fileID: 934634296404418517, guid: 345f61fd375dc8f448119073f0394ada, type: 2}
@@ -4536,7 +4536,7 @@ GameObject:
   - component: {fileID: 962693184}
   - component: {fileID: 962693185}
   m_Layer: 6
-  m_Name: PlaneContainer
+  m_Name: Treadmill
   m_TagString: TrackManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5612,11 +5612,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3001323c86d04444985884ce6ab653af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FULL_TIMER_INTERVAL_IN_SECONDS: 60
+  NORMAL_TIMER_INTERVAL_IN_SECONDS: 30
   magicBeans: {fileID: 1490840471}
+  trackSpeedMultiplier: {fileID: 1850712686}
   _timeRemaining: 120
   timeText: {fileID: 1148915692}
   shouldIncrementTime: 0
+  ODDS_FAST: 35
+  FAST_TIMER_INTERVAL_IN_SECONDS: 20
+  FAST_MULTIPLIER: 3
+  ODDS_SLOW: 35
+  SLOW_TIMER_INTERVAL_IN_SECONDS: 20
+  SLOW_MULTIPLIER: 0.25
 --- !u!1 &1167010669
 GameObject:
   m_ObjectHideFlags: 0
@@ -7868,7 +7875,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 855418191}
         m_TargetAssemblyTypeName: SceneLoadManager, Assembly-CSharp
-        m_MethodName: PlayGame
+        m_MethodName: PlayerSelect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8158,14 +8165,13 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Move - W, S, A, D, R, F
+  m_text: 'Move - W, A, S, D
 
 
     Pick Up / Drop Object - SPACE
 
 
-    Esc
-    - Pause'
+    Esc - Pause'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 345f61fd375dc8f448119073f0394ada, type: 2}
   m_sharedMaterial: {fileID: 934634296404418517, guid: 345f61fd375dc8f448119073f0394ada, type: 2}
@@ -9619,6 +9625,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 1
+  remainingTime: 0
 --- !u!4 &1850712687
 Transform:
   m_ObjectHideFlags: 0

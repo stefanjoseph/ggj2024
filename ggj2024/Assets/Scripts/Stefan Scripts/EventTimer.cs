@@ -1,11 +1,14 @@
 using TMPro;
+using UnityEditor.UIElements;
 using UnityEngine;
 
 public class EventTimer : MonoBehaviour
 {
-    public float FULL_TIMER_INTERVAL_IN_SECONDS;
+    public float NORMAL_TIMER_INTERVAL_IN_SECONDS;
 
     public MagicBeanController magicBeans;
+
+    public TrackSpeedMultiplier trackSpeedMultiplier;
 
     [SerializeField] private float _timeRemaining;
 
@@ -15,10 +18,17 @@ public class EventTimer : MonoBehaviour
 
     public bool shouldIncrementTime;
 
+    public int ODDS_FAST;
+    public float FAST_TIMER_INTERVAL_IN_SECONDS;
+    public float FAST_MULTIPLIER;
+    public int ODDS_SLOW;
+    public float SLOW_TIMER_INTERVAL_IN_SECONDS;
+    public float SLOW_MULTIPLIER;
+
     private void Start()
     {
         _timerIsRunning = true;
-        _timeRemaining = FULL_TIMER_INTERVAL_IN_SECONDS;
+        _timeRemaining = NORMAL_TIMER_INTERVAL_IN_SECONDS;
     }
 
     private void Update()
@@ -28,7 +38,7 @@ public class EventTimer : MonoBehaviour
             return;
         }
 
-        if (!magicBeans.shouldBeFloating)
+        if (!magicBeans.shouldBeFloating && trackSpeedMultiplier.value == 1.0f)
         {
             RunTimer();
         }
@@ -55,12 +65,12 @@ public class EventTimer : MonoBehaviour
             }
             else
             {
-                Debug.Log("Timer has expired... Release the Beans.");
+                Debug.Log("Timer has expired... Choosing event.");
                 _timeRemaining = 0;
                 _timerIsRunning = false;
 
-                magicBeans.shouldBeFloating = true;
-                timeText.text = "M A G I C  B E A N S";
+                SelectSpecialEvent();
+
             }
         }
         else
@@ -72,7 +82,29 @@ public class EventTimer : MonoBehaviour
     public void ResetTimer()
     {
         _timerIsRunning = true;
-        _timeRemaining = FULL_TIMER_INTERVAL_IN_SECONDS;
+        _timeRemaining = NORMAL_TIMER_INTERVAL_IN_SECONDS;
         DisplayTime(_timeRemaining);
     }
+
+    private void SelectSpecialEvent()
+    {
+        int selectionSeed = Random.Range(0, 100);
+
+        if (selectionSeed < ODDS_FAST)
+        {
+            trackSpeedMultiplier.ChangeSpeedForInterval(FAST_MULTIPLIER, FAST_TIMER_INTERVAL_IN_SECONDS);
+            timeText.text = "S P E E D  U P";
+        }
+        else if (selectionSeed < ODDS_FAST + ODDS_SLOW)
+        {
+            trackSpeedMultiplier.ChangeSpeedForInterval(SLOW_MULTIPLIER, SLOW_TIMER_INTERVAL_IN_SECONDS);
+            timeText.text = "S L O W  D O W N";
+        }
+        else
+        {
+            magicBeans.shouldBeFloating = true;
+            timeText.text = "M A G I C  B E A N S";
+        }
+    }
+
 }

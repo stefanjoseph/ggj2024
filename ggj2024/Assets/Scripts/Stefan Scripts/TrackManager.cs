@@ -46,12 +46,14 @@ public class TrackManager : MonoBehaviour
             Obstacle obstacleComponent = thisObstacle.GetComponent<Obstacle>();
             if (IsObstacleWithinVisibleWindow(obstacleComponent))
             {
+                // If it was inactive, play spawn SFX
                 thisObstacle.gameObject.SetActive(true);
                 Vector3 newPosition = DetermineAbsolutePositionUsingVantagePoint(ConvertToExitEdgeOffset(obstacleComponent.relativePosition), thisObstacle.gameObject.transform.position.y);
                 thisObstacle.transform.position = new Vector3(newPosition.x, newPosition.y, newPosition.z);
             }
             else
             {
+                // If it was active, play despawn SFX
                 thisObstacle.gameObject.SetActive(false);
             }
         }

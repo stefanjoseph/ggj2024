@@ -821,8 +821,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   results: {fileID: 196283586}
   shouldSetPlayer1: 0
-  player1Offset: {x: 30, y: 30, z: 0}
-  player2Offset: {x: -30, y: -30, z: 0}
+  player1Offset: {x: 50, y: 30, z: 0}
+  player2Offset: {x: -50, y: -30, z: 0}
   startButton: {fileID: 1322243474}
   gmoOrangeIcon: {fileID: 1481022899}
   ogOrangeIcon: {fileID: 244050835}
