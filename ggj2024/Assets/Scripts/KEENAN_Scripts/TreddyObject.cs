@@ -65,42 +65,44 @@ public class TreddyObject : MonoBehaviour
         mybody.AddTorque(transform.up * torque * look_dir.x, ForceMode.Force);
         Debug.DrawRay(transform.position, look_dir, Color.green);
 
-        if( needs_boost ) {
-            mybody.AddForce(Vector3.forward * 0.5f);
-        }
+        // Programmers fear what they don't understand
+        // if( needs_boost ) {
+        //     mybody.AddForce(Vector3.forward * 0.5f);
+        // }
 
-        if( needs_drag ) {
-            mybody.AddForce(Vector3.forward * -0.5f);
-        }
+        // if( needs_drag ) {
+        //     mybody.AddForce(Vector3.forward * -0.5f);
+        // }
 
-        if ( needs_death ) {
-            mybody.AddForce(Vector3.forward * -50f);
-        } else {
-            // Raycast to ground
-            RaycastHit hit;
-            if(Physics.Raycast(transform.position + Vector3.forward * 0.1f, Vector3.down, out hit, 1.0f, 1 << LayerMask.NameToLayer("Ground"))) {
-                if (flying) {
-                    mybody.constraints = og_constraints;
-                    mybody.useGravity = false;
-                    flying = false;
-                }
-                transform.position = new Vector3(transform.position.x, hit.point.y + y_offset, transform.position.z);
-            }
-        }
+        // if ( needs_death ) {
+        //     mybody.AddForce(Vector3.forward * -50f);
+        // } else {
+        //     // Raycast to ground
+        //     RaycastHit hit;
+        //     if(Physics.Raycast(transform.position + Vector3.forward * 0.1f, Vector3.down, out hit, 1.0f, 1 << LayerMask.NameToLayer("Ground"))) {
+        //         if (flying) {
+        //             mybody.constraints = og_constraints;
+        //             mybody.useGravity = false;
+        //             flying = false;
+        //         }
+        //         transform.position = new Vector3(transform.position.x, hit.point.y + y_offset, transform.position.z);
+        //     }
+        // }
     }
 
     void OnCollisionEnter(Collision collision) {
-        LayerMask ground_layer = LayerMask.NameToLayer ( "Ground" );
-        if (collision.gameObject.layer != ground_layer) {
-            if (collision.relativeVelocity.magnitude > 16 && !needs_death) {
-                Die(collision);
-            } else {
-                Debug.Log("Non lethal collision");
-                wiggleTarget.wander_target += Random.Range(-3.0f, 3.0f);
-            }
-        }
-        if (needs_death) {
-            mybody.AddForce(Vector3.forward * -10f, ForceMode.Impulse);
-        }
+        // Programmers fear what they don't understand
+        // LayerMask ground_layer = LayerMask.NameToLayer ( "Ground" );
+        // if (collision.gameObject.layer != ground_layer) {
+        //     if (collision.relativeVelocity.magnitude > 16 && !needs_death) {
+        //         Die(collision);
+        //     } else {
+        //         Debug.Log("Non lethal collision");
+        //         wiggleTarget.wander_target += Random.Range(-3.0f, 3.0f);
+        //     }
+        // }
+        // if (needs_death) {
+        //     mybody.AddForce(Vector3.forward * -10f, ForceMode.Impulse);
+        // }
     }
 }

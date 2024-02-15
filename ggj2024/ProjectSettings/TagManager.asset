@@ -14,6 +14,7 @@ TagManager:
   - PlayerSelectResults
   - MagicBeans
   - TrackManager
+  - TrackSpeedMultiplier
   layers:
   - Default
   - TransparentFX
