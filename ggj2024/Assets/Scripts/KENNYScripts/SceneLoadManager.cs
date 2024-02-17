@@ -47,6 +47,12 @@ public class SceneLoadManager : MonoBehaviour
 
     public void PlayerSelect()
     {
+        GameObject playerSelectResults = GameObject.FindGameObjectWithTag("PlayerSelectResults");
+        if (playerSelectResults != null)
+        {
+            Destroy(playerSelectResults);
+        }
+        
         Time.timeScale = 1f;
         clickSound.Play();
         SceneManager.LoadScene("PlayerSelect");
@@ -58,7 +64,6 @@ public class SceneLoadManager : MonoBehaviour
         clickSound.Play();
         Time.timeScale = 1.0f;
         SceneManager.LoadScene("TitlePage");
-        
     }
 
     public void CreditsPage()
