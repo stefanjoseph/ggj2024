@@ -11604,7 +11604,7 @@ MonoBehaviour:
   obstacleArch: {fileID: 534865023001288340, guid: 8d2dbaf583228479aa2e5dd3647c38c1, type: 3}
   fallingObstacles: []
   X_AXIS_OFFSET: 5
-  OBJECT_DROP_RATE_IN_SECONDS: 8
+  OBJECT_DROP_RATE_IN_SECONDS: 6
   timeSinceLastDrop: 0
   shouldUseEqualProbability: 0
   ODDS_RAMP: 30
